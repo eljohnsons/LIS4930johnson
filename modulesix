@@ -1,0 +1,58 @@
+# part one 
+import sys
+from datetime import datetime
+
+# Get the current time
+current_time = datetime.now()
+
+# Iterate over input lines from sys.stdin
+for line in sys.stdin:
+    # Split the line by tab ('\t') delimiter into a list of data
+    data = line.strip().split("\t")
+    
+    # Check if the length of the data is 6
+    if len(data) == 6:
+        # Extract the individual data elements
+        date, time, store, item, cost, payment = data
+        
+        # Print the item and cost
+        print("{0}\t{1}".format(item, cost))
+# part two 
+
+from datetime import datetime, timedelta
+
+# Get the current time
+current_time = datetime.now()
+
+# Add timedelta of -60 seconds and 2 years to the current time
+new_time = current_time + timedelta(seconds=-60) + timedelta(years=2)
+
+# Print the new time
+print(new_time)
+
+# part three
+
+
+from datetime import timedelta
+
+# Create a timedelta object representing 100 days, 10 hours, and 13 minutes
+time_delta = timedelta(days=100, hours=10, minutes=13)
+
+# Print the time delta
+print(time_delta)
+
+# part four 
+from datetime import timedelta
+
+def convert_to_timedelta(feet, inches):
+    # Convert feet and inches to total inches
+    total_inches = feet * 12 + inches
+    
+    # Create a timedelta object with minutes equal to total inches
+    return timedelta(minutes=total_inches)
+
+# Call the function with feet=5 and inches=10
+result = convert_to_timedelta(5, 10)
+
+# Print the result
+print(result)
