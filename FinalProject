@@ -1,0 +1,73 @@
+# Sample recipe database (You can add more recipes here)
+recipe_database = [
+    {
+        "title": "Chicken Stir-Fry",
+        "ingredients": ["chicken", "broccoli", "carrot", "bell pepper", "soy sauce", "garlic", "ginger", "sesame oil"],
+        "instructions": [
+            "In a large pan, heat sesame oil over medium-high heat.",
+            "Add minced garlic and ginger, sauté until fragrant.",
+            "Add sliced chicken and cook until browned.",
+            "Add sliced vegetables (broccoli, carrot, bell pepper) and stir-fry for a few minutes.",
+            "Pour soy sauce over the mixture and stir until evenly coated.",
+            "Serve hot with rice."
+        ]
+    },
+    {
+        "title": "Pasta Carbonara",
+        "ingredients": ["pasta", "bacon", "egg", "parmesan cheese", "black pepper", "garlic"],
+        "instructions": [
+            "Cook pasta in boiling salted water until al dente.",
+            "In a separate pan, cook bacon until crispy, then remove and crumble.",
+            "In a bowl, whisk together eggs, grated parmesan cheese, minced garlic, and black pepper.",
+            "Drain pasta and immediately add the egg mixture, tossing quickly to coat the pasta.",
+            "Add crumbled bacon on top and serve immediately."
+        ]
+    },
+    {
+    	"title": "Homemade Biscuits",
+    	"ingredients": [ "flour", "baking powder", "salt", "unsalted butter", "milk", "honey" ],
+    "instructions": [
+        "Preheat your oven to 425°F (220°C) and line a baking sheet with parchment paper.",
+        "In a large bowl, whisk together the 2 cups all-purpose flour, 1 tbs baking powder, and 1/2 ts salt.",
+        "Add the 1/3 cup cold cubed butter to the dry ingredients. Using a pastry cutter or two knives, cut the butter into the flour mixture until it resembles coarse crumbs.",
+        "If using 1 tbs honey, add it to the 3/4 cold milk and stir to combine. Then pour the milk mixture into the dry ingredients.",
+        "Stir the mixture until just combined. Be careful not to overmix; the dough should be slightly sticky.",
+        "Turn the dough out onto a floured surface. Gently pat or roll it to about 1-inch thickness.",
+        "Using a biscuit cutter or a round cookie cutter, cut out the biscuits and place them on the prepared baking sheet.",
+        "Gather the remaining dough scraps, pat or roll them again, and cut out more biscuits.",
+        "Bake the biscuits in the preheated oven for 12 to 15 minutes or until they turn golden brown on top.",
+        "Remove the biscuits from the oven and let them cool slightly before serving.",
+        "Enjoy your freshly baked homemade biscuits with butter, jam, or your favorite toppings!"
+    ]
+]
+
+def generate_recipe_from_ingredients(user_ingredients, recipe_database):
+    possible_recipes = []
+    
+    for recipe in recipe_database:
+        if all(ingredient in user_ingredients for ingredient in recipe["ingredients"]):
+            possible_recipes.append(recipe)
+    
+    if not possible_recipes:
+        return None
+    
+    selected_recipe = random.choice(possible_recipes)
+    return selected_recipe
+
+# Example usage:
+user_input_ingredients = input("Enter your ingredients (comma-separated): ").strip().split(",")
+user_input_ingredients = [ingredient.strip() for ingredient in user_input_ingredients]
+
+recipe = generate_recipe_from_ingredients(user_input_ingredients, recipe_database)
+
+if recipe:
+    print("\nRecipe Title:", recipe["title"])
+    print("\nIngredients:")
+    for i, ingredient in enumerate(recipe["ingredients"], 1):
+        print(f"{i}. {ingredient}")
+
+    print("\nInstructions:")
+    for i, instruction in enumerate(recipe["instructions"], 1):
+        print(f"{i}. {instruction}")
+else:
+    print("Sorry, no recipe found with the given ingredients.")
